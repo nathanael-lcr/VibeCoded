@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include "textarea.h"
 #include "waveform.h"
 #include "oscillator.h"
@@ -48,7 +49,7 @@ int main(void) {
     while (running) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT ||
-                (e.type == SDL_EVENT_KEY_DOWN && e.key.key == SDLK_DOLLAR))
+                (e.type == SDL_EVENT_KEY_DOWN && e.key.key == SDLK_ESCAPE))
                 running = 0;
 
             TextArea_HandleEvent(&textarea, &e);
@@ -167,7 +168,7 @@ int main(void) {
         Waveform_DrawWithLFOs(ren, &wave, lfos, MAX_LFOS, w, viz_height);
 
         // Dessiner le textarea (bas de l'écran)
-        TextArea_Draw(ren, &textarea, w, h*1.5);
+        TextArea_Draw(ren, &textarea, w, h);
 
         SDL_RenderPresent(ren);
         SDL_Delay(16);
